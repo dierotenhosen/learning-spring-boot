@@ -1,0 +1,72 @@
+buildscript {
+	ext {
+		// For the versions 2.7.x of Spring Boot, the release train of Spring Cloud is 2021.0.x.
+		// Most recent release for 2021.0.x is 2021.0.8
+		// See https://spring.io/projects/spring-cloud and
+		// https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-dependencies
+		springCloudVersion = '2021.0.8'
+	}
+}
+
+plugins {
+	id 'java'
+	id 'org.springframework.boot' version '2.7.13'
+	id 'io.spring.dependency-management' version '1.0.15.RELEASE'
+}
+
+group = 'com.greglturnquist.learningspringboot'
+version = '0.0.1-SNAPSHOT'
+
+java {
+	sourceCompatibility = '17'
+}
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+// Once the plugin io.spring.dependency-management has been applied, you can use it to import a Maven bom.
+// The imported bom will control the version of dependencies. I.e., you do not need to specify versions for dependencies.
+dependencyManagement {
+	imports {
+		mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+	}
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-webflux'
+	implementation 'org.springframework.boot:spring-boot-starter-data-mongodb-reactive'
+	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+	implementation 'org.springframework.boot:spring-boot-starter-actuator'
+	implementation 'org.springframework.boot:spring-boot-devtools'
+	implementation 'io.micrometer:micrometer-core'
+	compileOnly 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
+	annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
+	implementation 'org.springframework.boot:spring-boot-starter-data-mongodb' // Without this, a bean of type MongoOperations could not be found
+	// The following dependencies for Chapter 4, `Testing with Spring Boot`:
+	testImplementation 'org.springframework.boot:spring-boot-starter-test' // For test 1, unit tests.
+	testImplementation 'io.projectreactor:reactor-test' // For test 2, WebFlux-based tests.
+	testImplementation 'de.flapdoodle.embed:de.flapdoodle.embed.mongo' // For test 3, MongoDB-based tests.
+	// For test 4, Selenium-based tests.
+	implementation 'org.seleniumhq.selenium:htmlunit-driver'
+	implementation 'org.seleniumhq.selenium:selenium-java'
+	// The following dependencies for Chapter 6, `AMQP Messaging with Spring Boot`:
+	// implementation 'org.springframework.boot:spring-boot-starter-amqp'
+	implementation 'org.springframework.cloud:spring-cloud-starter-stream-rabbit'
+	implementation 'org.springframework.cloud:spring-cloud-stream-reactive:2.2.1.RELEASE'
+	// For Chapter 7:
+	implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-server'
+	implementation 'org.springframework.cloud:spring-cloud-starter-config'
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
+
