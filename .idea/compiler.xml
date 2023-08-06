@@ -9,16 +9,19 @@
           <entry name="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.projectlombok/lombok/1.18.28/a2ff5da8bcd8b1b26f36b806ced63213362c6dcc/lombok-1.18.28.jar" />
           <entry name="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework.boot/spring-boot-configuration-processor/2.7.13/7447e272307e17bdb0c86c7c49b66544f2bef5bf/spring-boot-configuration-processor-2.7.13.jar" />
         </processorPath>
-        <module name="images.main" />
+        <module name="com.greglturnquist.learningspringboot.comments.main" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="com.greglturnquist.learningspringboot.learning-spring-boot" target="17" />
       <module name="com.greglturnquist.learningspringboot.learning-spring-boot.main" target="17" />
       <module name="com.greglturnquist.learningspringboot.learning-spring-boot.test" target="17" />
+      <module name="comments" target="17" />
       <module name="comments.learning-spring-boot" target="17" />
       <module name="comments.learning-spring-boot.main" target="17" />
       <module name="comments.learning-spring-boot.test" target="17" />
+      <module name="comments.main" target="17" />
+      <module name="comments.test" target="17" />
       <module name="learning-spring-boot-config-repo.main" target="17" />
       <module name="learning-spring-boot-config-repo.test" target="17" />
       <module name="learning-spring-boot-eureka-server" target="17" />
